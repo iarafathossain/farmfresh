@@ -6,32 +6,52 @@ const items = [
   {
     value: "freshness",
     question: "How fresh is the produce I receive?",
-    answer:
-      "Our produce is sourced directly from local farmers and harvested only after your order is placed, ensuring maximum freshness and quality.",
+    answer: [
+      "Our produce is sourced directly",
+      "From local farmers and harvested",
+      "Only after your order is placed,",
+      "Ensuring maximum freshness and quality.",
+    ],
   },
   {
     value: "delivery",
     question: "How does delivery work?",
-    answer:
-      "Once you place an order, farmers prepare your items and we deliver them straight to your doorstep within 24–48 hours, depending on your location.",
+    answer: [
+      "Once you place an order, farmers",
+      "Prepare your items and we deliver",
+      "Them straight to your doorstep",
+      "Within 24–48 hours, depending on your location.",
+    ],
   },
   {
     value: "farmers",
     question: "Can I choose or know the farmers I buy from?",
-    answer:
-      "Yes! You can view farmer profiles, learn about their practices, and choose produce from specific local farmers you trust.",
+    answer: [
+      "Yes! You can view farmer profiles,",
+      "learn about their practices, and",
+      "choose produce from specific local",
+      "farmers you trust.",
+    ],
   },
   {
     value: "pricing",
     question: "Are your prices competitive?",
-    answer:
-      "By connecting you directly with farmers, we eliminate middlemen—giving you fair prices while ensuring farmers earn more for their produce.",
+    answer: [
+      "By connecting you directly with farmers,",
+      "we eliminate middlemen - giving you",
+      "fair prices while ensuring farmers",
+      "earn more for their produce.",
+    ],
   },
   {
     value: "availability",
     question: "What if an item is out of stock?",
-    answer:
-      "Since we depend on seasonal harvests, availability may vary. If an item is unavailable, we'll suggest fresh alternatives or notify you when it's back in stock.",
+    answer: [
+      "Since we depend on seasonal harvests,",
+      "availability may vary. If an item is",
+      "unavailable, we’ll suggest fresh",
+      "alternatives or notify you when it’s back in stock.",
+    ],
   },
 ];
 
@@ -44,7 +64,7 @@ function AccordionItem({
 }: {
   value: string;
   question: string;
-  answer: string;
+  answer: string[];
   openValue: string | null;
   onToggle: (val: string) => void;
 }) {
@@ -86,10 +106,13 @@ function AccordionItem({
         }`}
       >
         <div className="overflow-hidden">
-          <p className="text-sm font-light text-stone-500 dark:text-gray-300 leading-relaxed pb-5 pr-10">
-            <span className="text-green-600 mr-1 text-xs">✦</span>
-            {answer}
-          </p>
+          <ul className="list-disc list-inside text-sm font-light text-stone-500 dark:text-gray-300 leading-relaxed pb-5 pr-10">
+            {answer.map((line, index) => (
+              <li key={index} className="mb-1">
+                {line}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
