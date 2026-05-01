@@ -26,6 +26,7 @@ const ReviewItem = ({ review }: { review: IReviewFronted }) => {
   const [showReviewAction, setShowReviewAction] = useState<boolean>(false);
   const [showUpdateReview, setShowUpdateReview] = useState<boolean>(false);
   const [showFullComment, setShowFullComment] = useState<boolean>(false);
+  const [relativeUpdatedAt, setRelativeUpdatedAt] = useState<string>("");
 
   const session = useSession();
   const loggedInUserId = session?.data?.user?.id;
@@ -87,6 +88,8 @@ const ReviewItem = ({ review }: { review: IReviewFronted }) => {
   };
 
   useEffect(() => {
+    setRelativeUpdatedAt(getDateDiff(review.updatedAt!));
+
     const handleOutsideClick = (e: MouseEvent) => {
       if (
         reviewActionRef.current &&
@@ -101,7 +104,7 @@ const ReviewItem = ({ review }: { review: IReviewFronted }) => {
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-  }, []);
+  }, [review.updatedAt]);
 
   return (
     <div className="flex items-start space-x-4 dark:bg-gray-800 bg-white p-4 rounded-lg">
@@ -136,7 +139,7 @@ const ReviewItem = ({ review }: { review: IReviewFronted }) => {
                 {halfStar && <FaStarHalfAlt key="half" />}
               </div>
               <span className="text-sm text-gray-500 dark:text-gray-400">
-                {getDateDiff(review.updatedAt!)}
+                {relativeUpdatedAt}
               </span>
             </div>
           </div>
