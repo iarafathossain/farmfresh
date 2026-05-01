@@ -43,6 +43,7 @@ export const getAllFarmers = async () => {
 
 // Get farmer by id
 export const getFarmerById = async (farmerId: string) => {
+  await connectDB();
   const farmer = await User.findById(farmerId).lean<TBaseUser>();
   return transformMongoDoc(farmer);
 };

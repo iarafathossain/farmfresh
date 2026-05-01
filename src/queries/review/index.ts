@@ -34,6 +34,7 @@ export const getSingleReviewByProductIdAndCustomerId = async (
 
 // Get Review by id
 export const getReviewById = async (reviewId: string) => {
+  await connectDB();
   const review = await Review.findById(reviewId).lean<IReviewDB>();
 
   return transformMongoDoc(review);
