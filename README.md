@@ -1,4 +1,4 @@
-# FarmFresh – Final Assignment of Reactive Accelerator (React/Next.js) Course (rnext-batch-3)
+# FarmFresh
 
 ## Introduction
 
@@ -14,14 +14,6 @@ The design of FarmFresh focuses on a farming-themed aesthetic combined with an e
 - Each process in the app is well-connected for a seamless experience.
 
 ## Features
-
-### Authentication
-
-- Complete authentication flow with **Email** and **Google** credentials.
-  - Login and Register using Email/Password or Google.
-  - Password reset system with email confirmation.
-  - Middleware-protected routes.
-  - Refresh and Access Token setup for secure sessions.
 
 ### Farmer Features
 
@@ -71,18 +63,91 @@ The **Navbar** is common across all pages but adapts based on user login status.
 - **If logged in as a Farmer:** Show menu items: `Home`, `Add Product`, `Manage Products`, `About`, `Logout`.
 - **If logged in as a Customer:** Show menu items: `Home`, `Products`, `Farmers`, `My Orders`, `About`, `Logout`.
 
-**Page Access and Functionality:**
+### Authentication
+
+- Complete authentication flow with **Email** and **Google** credentials.
+  - Login and Register using Email/Password or Google.
+  - Password reset system with email confirmation.
+  - Middleware-protected routes.
+  - Refresh and Access Token setup for secure sessions.
+
+## Project Structure
+
+```text
+src/
+├── actions/          # Server actions for auth, products, and reviews
+├── app/              # App Router pages, layouts, route handlers, and UI shells
+├── auth.ts           # NextAuth configuration and handlers
+├── auth.config.ts    # Shared auth configuration
+├── components/       # Reusable UI and feature components
+├── config/           # Centralized environment configuration
+├── context/          # React context helpers
+├── data/             # Static or seed-like data
+├── hooks/            # Custom React hooks
+├── libs/             # Database, cloud, and third-party helpers
+├── middleware.ts     # Route protection and middleware logic
+├── models/           # Mongoose models
+├── providers/        # Client providers and app-level wrappers
+├── queries/          # Read/query helpers for database access
+├── reducers/         # Reducers for state management
+├── services/         # Email and upload services
+├── types/            # Shared TypeScript types
+├── utils/            # Utility helpers
+└── validations/      # Form and input validation helpers
+```
+
+## App Routing Structure
+
+```text
+src/app/
+├── page.tsx                    # Home page
+├── layout.tsx                  # Root layout and global providers
+├── loading.tsx                 # Global loading UI
+├── error.tsx                   # Global error boundary UI
+├── not-found.tsx               # 404 page
+├── about/page.tsx              # About page
+├── add-product/page.tsx        # Farmer-only add product page
+├── cart/page.tsx               # Cart page
+├── farmers/page.tsx            # Public farmers listing page
+├── forgot-password/page.tsx    # Forgot password page
+├── login/page.tsx              # Login page
+├── manage-products/page.tsx    # Farmer product management page
+├── my-orders/page.tsx          # Orders page for logged-in users
+├── payment-process/page.tsx    # Payment and checkout flow
+├── products/page.tsx           # Products listing and filtering page
+├── products/[productId]/page.tsx        # Product details page
+├── products/edit/[editProductId]/page.tsx # Edit product page
+├── profile/page.tsx            # Profile page
+├── register/page.tsx           # Registration page
+├── reset-password/page.tsx     # Reset password page
+├── reviews/page.tsx            # Reviews listing page
+├── success/[orderId]/page.tsx   # Order success page
+├── api/                        # Route handlers
+│   ├── auth/[...nextauth]/route.ts
+│   ├── cart/route.ts
+│   ├── favorite/route.ts
+│   ├── og/route.ts
+│   └── send-email/
+│       ├── order-invoice/route.ts
+│       ├── order-status-update/route.ts
+│       ├── send-reset-password/route.ts
+│       └── send-reset-success/route.ts
+├── @authInterceptedModel/      # Intercepted auth modal route segment
+│   ├── default.tsx
+│   ├── (.)login/
+│   └── (.)register/
+```
+
+## Page Access and Functionality
 
 - Only farmer-type users can access the **Add Product** page to create new products.
-- Farmers can manage their products using the **Manage Products** page — edit, publish/unpublish, delete, search, or filter items.
-- All users (including guests) can view registered farmers on the **Farmers** page.
-- The **Cart** menu redirects users to the Cart Page (which must be designed following the app’s theme and design system).
-- A **Favorite Products** page should allow users to favorite/unfavorite products, purchase, or add them to the cart.
-- Proper handling of states such as **Loading**, **Error**, and **Not Found** is implemented.
-- **SEO-Friendly Pages:**  
-  The Home and Product Details pages include meta title, description, and image for social sharing (e.g., Facebook).  
-  Product details dynamically generate SEO metadata based on the product link.
-- A smooth **Breadcrumb Navigation** is implemented throughout the app.
+- Farmers can manage their products using the **Manage Products** page - edit, publish/unpublish, delete, search, or filter items.
+- All users, including guests, can view registered farmers on the **Farmers** page.
+- The **Cart** page supports product review, removal, and checkout-related actions.
+- The **Reviews** page lists customer reviews and the **Product Details** page supports product-specific review actions.
+- Proper handling of **Loading**, **Error**, and **Not Found** states is implemented.
+- The **Home** and **Product Details** pages include SEO metadata for social sharing.
+- Breadcrumb navigation is implemented across product and account flows.
 
 ## Tech Stack
 
@@ -108,11 +173,7 @@ Follow these steps to get started:
 # 1. Copy one of the following repository URLs:
 
 # HTTPS
-https://github.com/arafatGithubCode/farmfresh-reactive-accelerator-final-assignment-m11.git
-
-# SSH
-git@github.com:arafatGithubCode/farmfresh-reactive-accelerator-final-assignment-m11.git
-
+https://github.com/iarafathossain/farmfresh.git
 
 # 2. Clone the repository
 git clone <your-selected-url>

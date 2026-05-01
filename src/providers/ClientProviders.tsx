@@ -13,7 +13,12 @@ type Props = {
 
 export default function ClientProviders({ children }: Props) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      enableColorScheme={false}
+    >
       <SessionProvider>
         <CartProvider>
           <BreadCrumb />

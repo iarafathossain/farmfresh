@@ -1,10 +1,10 @@
 import Footer from "@/components/Footer";
 import NavbarWrapper from "@/components/navbar/NavbarWrapper";
 import ClientProviders from "@/providers/ClientProviders";
+import { getBaseUrl } from "@/utils/getBaseUrl";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import { getBaseUrl } from "@/utils/getBaseUrl";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
@@ -169,7 +169,7 @@ export default async function RootLayout({
   authInterceptedModel: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         {/* JSON-LD structured data */}
         <script
@@ -181,7 +181,6 @@ export default async function RootLayout({
         <meta name="msapplication-TileColor" content="#16a34a" />
       </head>
       <body
-        suppressHydrationWarning={true}
         className={`${inter.className} bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300`}
       >
         <ClientProviders>

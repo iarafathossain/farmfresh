@@ -8,7 +8,6 @@ import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import client from "./libs/mongoClient";
-import { showToast } from "./providers/ToastProvider";
 import { getUserByEmail } from "./queries/user";
 
 // Extent JWT
@@ -107,13 +106,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           const exist = await getUserByEmail(email);
           if (!exist) {
-            showToast("Invalid email or password.", "ERROR");
             throw new Error("Invalid email or password.");
           }
           const isMatch = await bcrypt.compare(password, exist.password);
 
           if (!isMatch) {
-            showToast("Invalid email or password.", "ERROR");
             throw new Error("Invalid email or password.");
           }
           return exist;
