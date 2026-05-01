@@ -104,7 +104,7 @@ const ReviewItem = ({ review }: { review: IReviewFronted }) => {
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-  }, [review.updatedAt]);
+  }, []);
 
   return (
     <div className="flex items-start space-x-4 dark:bg-gray-800 bg-white p-4 rounded-lg">
