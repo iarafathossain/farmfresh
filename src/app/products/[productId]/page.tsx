@@ -51,7 +51,7 @@ const ProductDetailsPage = async ({
   const reviews = await getReviewsByProductId(productId);
   const loggedInUserReview = await getSingleReviewByProductIdAndCustomerId(
     customerId!,
-    productId
+    productId,
   );
 
   return (

@@ -4,7 +4,7 @@ import { useBalance } from "@/hooks/useBalance";
 import { useCart } from "@/hooks/useCart";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FaArrowRightLong, FaMinus, FaPlus, FaTrash } from "react-icons/fa6";
 import { ImCheckmark } from "react-icons/im";
 import { IoCloseSharp, IoWarning } from "react-icons/io5";
@@ -20,7 +20,7 @@ const CartDetails = () => {
   const { cart, updateCart } = useCart();
 
   const selectedItems = cart?.items?.filter(
-    (item) => checkedItems[item.product.id]
+    (item) => checkedItems[item.product.id],
   );
 
   const selectedItemProductIds = selectedItems?.map((item) => item.product.id);
@@ -31,7 +31,7 @@ const CartDetails = () => {
   const allItemProductIds = cart?.items?.map((item) => item.product.id) || [];
 
   const isAtLeastOneSelected = allItemProductIds.some(
-    (id) => checkedItems[id!]
+    (id) => checkedItems[id!],
   );
   const isAllSelected =
     allItemProductIds.length > 0 &&
@@ -131,9 +131,8 @@ const CartDetails = () => {
               const amount = item?.product?.price * item?.quantity;
               const discount = amount * (item?.product?.discountRate / 100);
               return (
-                <>
+                <Fragment key={item.product.id}>
                   <li
-                    key={item.product.id}
                     className={`flex flex-col w-full rounded-lg transition-colors ${
                       isChecked
                         ? "bg-primary-50 bg-opacity-40 dark:bg-opacity-5"
@@ -145,6 +144,7 @@ const CartDetails = () => {
                         type="checkbox"
                         className="peer hidden"
                         checked={isChecked}
+                        onChange={() => handleSingleSelect(item.product.id)}
                       />
 
                       {/* Custom checkbox */}
@@ -216,7 +216,7 @@ const CartDetails = () => {
                     </div>
                   </li>
                   {cart?.items?.length - 1 !== index && <Divider />}
-                </>
+                </Fragment>
               );
             })
           )}
@@ -262,7 +262,7 @@ const CartDetails = () => {
             <Link
               className="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 hover:scale-105 p-4 rounded-lg duration-200 my-2"
               href={`/payment-process?items=${selectedItemProductIds.join(
-                ","
+                ",",
               )}`}
             >
               <span className="text-white text-xl">Proceed to Checkout</span>

@@ -1,6 +1,5 @@
 "use client";
 
-import BreadCrumb from "@/components/ui/BreadCrumb";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import React from "react";
@@ -21,7 +20,6 @@ export default function ClientProviders({ children }: Props) {
     >
       <SessionProvider>
         <CartProvider>
-          <BreadCrumb />
           {children}
           <ToastProvider />
         </CartProvider>

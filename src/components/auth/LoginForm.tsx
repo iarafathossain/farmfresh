@@ -51,7 +51,7 @@ const LoginForm = () => {
         }
         resetForm();
         setLoading(false);
-        window.location.href = "/profile";
+        window.location.href = "/my-orders";
       } catch (error) {
         catchErr(error);
         if (err) {

@@ -22,12 +22,13 @@ const Hero = () => {
     setQuery((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleClick = () => {
+  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const params = new URLSearchParams(searchParams.toString());
     if (query.term) {
-      params.set("query", query.term);
+      params.set("term", query.term);
     } else {
-      params.delete("query");
+      params.delete("term");
     }
 
     if (query.category) {
@@ -59,7 +60,10 @@ const Hero = () => {
 
           {/* <!-- Search Bar --> */}
           <div className="max-w-2xl mx-auto mb-8">
-            <div className="flex flex-wrap rounded-lg overflow-hidden shadow-lg">
+            <form
+              className="flex flex-wrap rounded-lg overflow-hidden shadow-lg"
+              onSubmit={handleClick}
+            >
               <input
                 type="text"
                 name="term"
@@ -81,13 +85,12 @@ const Hero = () => {
                 <option value="dairy">Dairy</option>
               </select>
               <button
-                type="button"
-                onClick={handleClick}
+                type="submit"
                 className="bg-primary-700 hover:bg-primary-800 px-8 py-4 transition"
               >
                 <IoSearch className="text-white text-2xl" />
               </button>
-            </div>
+            </form>
           </div>
 
           {/* <!-- Stats --> */}

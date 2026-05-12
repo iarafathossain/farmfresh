@@ -23,7 +23,7 @@ const ManageProductPage = async ({
   const farmerId = userSession?.id;
   const { products, pagination } = await getProductsByFarmerId(
     searchParams,
-    farmerId!
+    farmerId!,
   );
 
   if (userSession?.role !== "Farmer")
